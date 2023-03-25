@@ -14,11 +14,10 @@ function NavHead() {
   useEffect(() => {
     if (localStorage.getItem("currentLoggedIn")) {
       setUserName(localStorage.getItem("currentLoggedIn"));
-      setJumlahItem(
-        data.user.find(
-          (x) => x.name === localStorage.getItem("currentLoggedIn")
-        ).idProduct.length
+      let cartData = data.user.find(
+        (x) => x.name === localStorage.getItem("currentLoggedIn")
       );
+      setJumlahItem(cartData ? cartData.idProduct.length : 0);
     }
   }, [setUserName, setJumlahItem, userName]);
 

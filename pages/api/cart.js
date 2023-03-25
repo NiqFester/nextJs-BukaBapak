@@ -28,31 +28,40 @@ export default function handler(req, res) {
     returnedObj = {
       message: "success",
     };
+    const conditionOfNew = Boolean(
+      user.findIndex((x) => x.name === req.body.act[1]) === -1
+    );
+    if (conditionOfNew) {
+      user.push({ name: req.body.act[1], idProduct: [{ ...newData }] });
+      returnedObj = {
+        message: "Cart baru",
+      };
+    }
 
-    const changedUser = user.map((pd) => {
-      if (pd.name === req.body.act[1]) {
-        if (req.body.act[0] === "ADD CART") {
-          let Flags = true;
-          let newPD = [...pd.idProduct];
-          newPD.push(newData);
-          if (pd.idProduct.findIndex((x) => x.id === newData.id) !== -1) {
-            Flags = false;
-            returnedObj = {
-              message: `Ada Produk sama ${pd.idProduct.findIndex(
-                (x) => x.id === newData.id
-              )} ${newData.id}`,
-            };
+    const changedUser = conditionOfNew
+      ? user
+      : user.map((pd) => {
+          if (pd.name === req.body.act[1]) {
+            if (req.body.act[0] === "ADD CART") {
+              let Flags = true;
+              let newPD = [...pd.idProduct];
+              newPD.push(newData);
+              if (pd.idProduct.findIndex((x) => x.id === newData.id) !== -1) {
+                Flags = false;
+                returnedObj = {
+                  message: `Ada Produk sama `,
+                };
+              }
+
+              return {
+                name: pd.name,
+                idProduct: Flags ? [...newPD] : [...pd.idProduct],
+              };
+            }
+            return { ...newData };
           }
-
-          return {
-            name: pd.name,
-            idProduct: Flags ? [...newPD] : [...pd.idProduct],
-          };
-        }
-        return { ...newData };
-      }
-      return pd;
-    });
+          return pd;
+        });
 
     fs.writeFileSync(filepath, JSON.stringify({ user: changedUser }));
   }

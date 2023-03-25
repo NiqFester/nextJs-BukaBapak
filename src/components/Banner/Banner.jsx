@@ -15,16 +15,10 @@ export default function Banner() {
       <Splide
         aria-label="Banner"
         options={{
-          intersection: {
-            inView: {
-              autoplay: true,
-            },
-          },
           rewind: true,
           height: "200px",
           type: "loop",
           perPage: 2,
-          focus: 0,
           gap: "15px",
           omitEnd: true,
           padding: 40,
@@ -36,6 +30,7 @@ export default function Banner() {
               "splide__arrow !bg-white !p-[14px] !h-[40px] !w-[40px] !opacity-100 ",
             //arti tanda seru sebelum nama kelas itu biar bisa override kelas splide arrow
           },
+          speed: 2000,
           /* 
           Jadi penjelasan propertinya secara berurutan
           tinggi, tipe loop, gambar yang ditampilkan tiap slide, jarak, kecepatan pindah gambar,
