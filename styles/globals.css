@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+.splide__pagination__page {
+  background: none !important;
+  
+}
+
+.splide__arrow:disabled{
+  display: none;
+}
+
+.splide__pagination_first {
+  counter-reset: pagination-num;
+  bottom: -25px !important;
+}
+
+.splide__pagination__page_first:before {
+  counter-increment: pagination-num;
+  content: counter( pagination-num );
+}
+
+.splide__arrow_first {
+ background: none !important;
+ top: 102% !important;
+}
+.splide__arrow_first svg {
+  height: 13px;
+  width: 21px;
+}
