@@ -1,11 +1,11 @@
 import { useRef, useState } from "react";
-import Image from 'next/image';
+import Image from "next/image";
 
 export default function Search({ display }) {
   const [fcs, setFcs] = useState("");
-  const [searchData, setSearchData] = useState([])
-  const handleChange = async (event)=> {
-    setFcs(event.target.value)
+  const [searchData, setSearchData] = useState([]);
+  const handleChange = async (event) => {
+    setFcs(event.target.value);
     try {
       const response = await fetch(`/api/search?search=${fcs}`, {
         method: "GET",
@@ -14,12 +14,11 @@ export default function Search({ display }) {
         },
       });
       const data = await response.json();
-      setSearchData(data.data)
+      setSearchData(data.data);
     } catch (e) {
       console.log(e);
     }
-
-  }
+  };
   return (
     <div id="search-btn" className="flex justify-center w-[30%] relative  ">
       <div className="w-full mb-3">
@@ -52,13 +51,17 @@ export default function Search({ display }) {
           </span>
         </div>
       </div>
-      <div className="absolute flex-col w-full bg-white border-2 border-t-2 top-10 first:border-none "
-      style={{display: fcs===''?'none':'flex'}}>
-      {searchData.map((x,i)=>{
-          return (<div key={i} className="flex">
-          <Image src={x.thumbnail} height={16} width={24} alt="ico" />
-          <p className="ml-2 capitalize border-t">{x.title}</p>
-        </div>)
+      <div
+        className="absolute flex-col w-full bg-white border-2 border-t-2 top-10 first:border-none "
+        style={{ display: fcs === "" ? "none" : "flex" }}
+      >
+        {searchData.map((x, i) => {
+          return (
+            <div key={i} className="flex">
+              <Image src={x.thumbnail} height={16} width={24} alt="ico" />
+              <p className="ml-2 capitalize border-t">{x.title}</p>
+            </div>
+          );
         })}
       </div>
     </div>

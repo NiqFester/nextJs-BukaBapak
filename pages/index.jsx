@@ -56,35 +56,37 @@ export default function Home({ data }) {
           Maaf tapi Web ini hanya bisa dilihat di Pc
         </p>
       </div>
-      <div className="fixed top-0 z-50 backdrop-brightness-50 h-[100vh] w-[100vw] py-36" style={{display: first?'block':'none'}}>
+      <div
+        className="fixed top-0 z-50 backdrop-brightness-50 h-[100vh] w-[100vw] py-36"
+        style={{ display: first ? "block" : "none" }}
+      >
         <div className="mx-auto bg-white rounded-md w-[40vw] flex flex-col p-10 relative">
-        <button className="absolute px-[6px] font-bold text-white bg-purple-600 rounded-full top-4 right-10"
-        onClick={()=>{
-          setFirst(false)
-          localStorage.setItem("notFirstTime",true)
-        }}>X</button>
+          <button
+            className="absolute px-[6px] font-bold text-white bg-purple-600 rounded-full top-4 right-10"
+            onClick={() => {
+              setFirst(false);
+              localStorage.setItem("notFirstTime", true);
+            }}
+          >
+            X
+          </button>
 
           <p className="text-2xl font-bold text-center">Perhatian!</p>
           <br />
           <p className="text-lg text-justify">
-            Hal-hal yang berkaitan dengan memodifikasi data tidak akan bekerja.
-            Jika Anda benar benar ingin mencobanya maka saya sarankan untuk
-            clone project ini. API yang saya gunakan hanya merubah data lokal
+            Hal-hal yang berkaitan dengan memodifikasi data (Register, edit
+            produk dan tambahkan produk dan lain sebagainya) tidak akan bekerja. Jika Anda benar
+            benar ingin mencobanya maka saya sarankan untuk clone project ini.
+            API yang saya gunakan hanya merubah data lokal
           </p>
           <br />
-          <p className="text-lg text-justify">
-            Login Dengan 
-          </p>
-          <p className="text-lg text-justify">
-            Email: admin@admin
-          </p> 
-          <p className="text-lg text-justify">
-Password : admin 
-          </p> 
+          <p className="text-lg text-justify">Login Dengan</p>
+          <p className="text-lg text-justify">Email: admin@admin</p>
+          <p className="text-lg text-justify">Password : admin</p>
           <p className="text-lg text-justify">
             Untuk menikmati semua fitur yang ada.
-          </p> 
-          </div>
+          </p>
+        </div>
       </div>
     </>
   );
