@@ -22,7 +22,9 @@ export default function handler(req, res) {
   const { method, query } = req;
   const { search } = query;
   const { products } = extractData(filepath);
+
   let returnedObj = {};
+  
   if (method === "GET") {
     const filteredData = products.filter((el) => {
       if (search === "") {

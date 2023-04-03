@@ -10,6 +10,7 @@ import { useEffect, useState } from "react";
 
 export default function Home({ data }) {
   const [first, setFirst] = useState(true);
+  
   useEffect(() => {
     if (localStorage.getItem("notFirstTime")) {
       setFirst(false);

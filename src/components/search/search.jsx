@@ -4,6 +4,7 @@ import Image from "next/image";
 export default function Search({ display }) {
   const [fcs, setFcs] = useState("");
   const [searchData, setSearchData] = useState([]);
+  
   const handleChange = async (event) => {
     setFcs(event.target.value);
     try {
