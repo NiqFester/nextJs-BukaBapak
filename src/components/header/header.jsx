@@ -78,7 +78,7 @@ function NavHead() {
               userName ? "hidden" : "lg:flex"
             } `}
           >
-            <Link className="mt-1 ml-8 " href="/register">
+            <Link aria-disabled className="mt-1 ml-8 " href="/register">
               Register
             </Link>
             <Link className="mt-1 ml-8 " href="/login">

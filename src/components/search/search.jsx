@@ -1,29 +1,36 @@
 import { useRef, useState } from "react";
+import Image from 'next/image';
 
 export default function Search({ display }) {
   const [fcs, setFcs] = useState("");
-  const count = useRef(false);
-  function onEnter() {
-    count.current ? (count.current = false) : (count.current = true);
-    setFcs(
-      count.current
-        ? "Maaf fungsi Search belum di buat"
-        : "Saya sedang mempelajarinya"
-    );
+  const [searchData, setSearchData] = useState([])
+  const handleChange = async (event)=> {
+    setFcs(event.target.value)
+    try {
+      const response = await fetch(`/api/search?search=${fcs}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const data = await response.json();
+      setSearchData(data.data)
+    } catch (e) {
+      console.log(e);
+    }
+
   }
   return (
-    <div id="search-btn" className="flex justify-center lg:w-[30%] sm:w-4 ">
-      <div className="mb-3 w-full">
-        <div className=" relative mb-4 flex w-full flex-wrap items-stretch  rounded border border-solid border-neutral-300">
+    <div id="search-btn" className="flex justify-center w-[30%] relative  ">
+      <div className="w-full mb-3">
+        <div className="relative flex flex-wrap items-stretch w-full mb-4 border border-solid rounded border-neutral-300">
           <input
             type="search"
             className="relative m-0 block w-[1%] min-w-0 flex-auto bg-transparent  bg-clip-padding px-3 py-1.5 text-base font-normal text-neutral-700 outline-none transition duration-300 ease-in-out focus:border-primary-600 focus:text-neutral-700 focus:shadow-te-primary focus:outline-none dark:border-neutral-600 dark:text-neutral-200 dark:placeholder:text-neutral-200"
             placeholder={`Coba cari ${display}`}
             aria-label="Search"
-            onMouseEnter={onEnter}
-            onMouseLeave={() => setFcs("")}
             value={fcs}
-            onChange={() => {}}
+            onChange={handleChange}
             aria-describedby="button-addon2"
           />
           <span
@@ -34,7 +41,7 @@ export default function Search({ display }) {
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
               fill="currentColor"
-              className="h-5 w-5"
+              className="w-5 h-5"
             >
               <path
                 fillRule="evenodd"
@@ -44,6 +51,15 @@ export default function Search({ display }) {
             </svg>
           </span>
         </div>
+      </div>
+      <div className="absolute flex-col w-full bg-white border-2 border-t-2 top-10 first:border-none "
+      style={{display: fcs===''?'none':'flex'}}>
+      {searchData.map((x,i)=>{
+          return (<div key={i} className="flex">
+          <Image src={x.thumbnail} height={16} width={24} alt="ico" />
+          <p className="ml-2 capitalize border-t">{x.title}</p>
+        </div>)
+        })}
       </div>
     </div>
   );
