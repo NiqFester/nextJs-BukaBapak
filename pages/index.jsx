@@ -23,7 +23,7 @@ export default function Home({ data }) {
 
   return (
     <>
-      <div className="lg:block sm:hidden">
+      <div>
         <Kategori products={data} />
         <Banner />
         <IconMenu />
@@ -51,7 +51,7 @@ export default function Home({ data }) {
           <button className="px-2 py-1 border border-slate-300">Teman</button>
         </div>
       </div>
-      <div className="sm:block lg:hidden">
+      <div className="hidden">
         <p className="text-center mt-[50vh] text-4xl">
           {" "}
           Maaf tapi Web ini hanya bisa dilihat di Pc
